@@ -6,11 +6,11 @@ import clsx from 'clsx';
 export type OnClick = () => void;
 
 type TArrowFunc = {
-	isOpen: boolean;
+	isMenuOpen: boolean;
 	onClick: OnClick;
 };
 
-export const ArrowButton = ({ isOpen, onClick }: TArrowFunc) => {
+export const ArrowButton = ({ isMenuOpen, onClick }: TArrowFunc) => {
 	return (
 		<div
 			onClick={onClick}
@@ -18,13 +18,13 @@ export const ArrowButton = ({ isOpen, onClick }: TArrowFunc) => {
 			aria-label='Открыть/Закрыть форму параметров статьи'
 			tabIndex={0}
 			className={clsx(styles.container, {
-				[styles.container_open]: isOpen,
+				[styles.container_open]: isMenuOpen,
 			})}>
 			<img
 				src={arrow}
 				alt='иконка стрелочки'
 				className={clsx(styles.arrow, {
-					[styles.arrow_open]: isOpen,
+					[styles.arrow_open]: isMenuOpen,
 				})}
 			/>
 		</div>

@@ -37,6 +37,7 @@ export const Option = (props: OptionProps) => {
 			ref={optionRef}>
 			<input
 				className={styles.input}
+				disabled={isChecked}
 				type='radio'
 				name={groupName}
 				id={inputId}

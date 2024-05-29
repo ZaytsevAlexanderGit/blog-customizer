@@ -25,7 +25,7 @@ export type ParamsFormType = {
 };
 
 export const ArticleParamsForm = ({ articleRef, onChange }: ParamsFormType) => {
-	const [isOpen, setIsOpen] = useState<boolean>(false);
+	const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false);
 
 	const [selectedOptions, setSelectedOptions] = useState<ParameterFormType>({
 		...defaultArticleState,
@@ -37,10 +37,10 @@ export const ArticleParamsForm = ({ articleRef, onChange }: ParamsFormType) => {
 			if (
 				target instanceof Node &&
 				articleRef.current &&
-				isOpen &&
+				isMenuOpen &&
 				articleRef.current.contains(target)
 			) {
-				setIsOpen(!isOpen);
+				setIsMenuOpen(!isMenuOpen);
 			}
 		};
 
@@ -49,23 +49,30 @@ export const ArticleParamsForm = ({ articleRef, onChange }: ParamsFormType) => {
 		return () => {
 			window.removeEventListener('click', handleClick);
 		};
-	}, [isOpen]);
+	}, [isMenuOpen]);
 
 	const handleClickArrow = () => {
-		setIsOpen(!isOpen);
+		setIsMenuOpen(!isMenuOpen);
 	};
 
 	return (
 		<>
-			<ArrowButton onClick={handleClickArrow} isOpen={isOpen} />
+			<ArrowButton onClick={handleClickArrow} isMenuOpen={isMenuOpen} />
 			<aside
 				className={clsx(styles.container, {
-					[styles.container_open]: isOpen,
+					[styles.container_open]: isMenuOpen,
 				})}>
 				<form
 					className={styles.form}
 					onSubmit={(e) => {
 						e.preventDefault();
+						onChange({
+							'--font-family': selectedOptions.fontFamilyOption.value,
+							'--font-size': selectedOptions.fontSizeOption.value,
+							'--font-color': selectedOptions.fontColor.value,
+							'--container-width': selectedOptions.contentWidth.value,
+							'--bg-color': selectedOptions.backgroundColor.value,
+						} as CSSProperties);
 					}}>
 					<Text weight={800} size={31} uppercase align={'left'}>
 						задайте параметры
@@ -139,19 +146,7 @@ export const ArticleParamsForm = ({ articleRef, onChange }: ParamsFormType) => {
 								onChange(defaultArticleCSS);
 							}}
 						/>
-						<Button
-							title='Применить'
-							type='submit'
-							onClick={() => {
-								onChange({
-									'--font-family': selectedOptions.fontFamilyOption.value,
-									'--font-size': selectedOptions.fontSizeOption.value,
-									'--font-color': selectedOptions.fontColor.value,
-									'--container-width': selectedOptions.contentWidth.value,
-									'--bg-color': selectedOptions.backgroundColor.value,
-								} as CSSProperties);
-							}}
-						/>
+						<Button title='Применить' type='submit' />
 					</div>
 				</form>
 			</aside>

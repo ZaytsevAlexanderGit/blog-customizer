@@ -16,7 +16,7 @@ const ArrowButtonForStory = () => {
 	return (
 		<>
 			<ArrowButton
-				isOpen={isClicked}
+				isMenuOpen={isClicked}
 				onClick={() => {
 					setIsClicked(!isClicked);
 				}}
