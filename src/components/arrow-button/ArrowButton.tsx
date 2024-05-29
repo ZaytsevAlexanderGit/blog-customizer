@@ -12,7 +12,6 @@ type TArrowFunc = {
 
 export const ArrowButton = ({ isOpen, onClick }: TArrowFunc) => {
 	return (
-		/* Не забываем указаывать role и aria-label атрибуты для интерактивных элементов */
 		<div
 			onClick={onClick}
 			role='button'
