@@ -1,3 +1,5 @@
+import { CSSProperties } from 'react';
+
 export const fontFamilyClasses = [
 	'open-sans',
 	'ubuntu',
@@ -18,7 +20,11 @@ export type OptionType = {
 export const fontFamilyOptions: OptionType[] & {
 	optionClassName?: FontFamiliesClasses;
 } = [
-	{ title: 'Open Sans', value: 'Open Sans', className: fontFamilyClasses[0] },
+	{
+		title: 'Open Sans',
+		value: 'Open Sans',
+		className: fontFamilyClasses[0],
+	},
 	{ title: 'Ubuntu', value: 'Ubuntu', className: fontFamilyClasses[1] },
 	{
 		title: 'Cormorant Garamond',
@@ -168,6 +174,14 @@ export const fontSizeOptions: OptionType[] = [
 	{ title: '38px', value: '38px', className: 'font-size-38' },
 ];
 
+export type ParameterFormType = {
+	fontFamilyOption: OptionType;
+	fontSizeOption: OptionType;
+	fontColor: OptionType;
+	backgroundColor: OptionType;
+	contentWidth: OptionType;
+};
+
 export const defaultArticleState = {
 	fontFamilyOption: fontFamilyOptions[0],
 	fontColor: fontColors[0],
@@ -175,5 +189,13 @@ export const defaultArticleState = {
 	contentWidth: contentWidthArr[0],
 	fontSizeOption: fontSizeOptions[0],
 };
+
+export const defaultArticleCSS = {
+	'--font-family': defaultArticleState.fontFamilyOption.value,
+	'--font-size': defaultArticleState.fontSizeOption.value,
+	'--font-color': defaultArticleState.fontColor.value,
+	'--container-width': defaultArticleState.contentWidth.value,
+	'--bg-color': defaultArticleState.backgroundColor.value,
+} as CSSProperties;
 
 export type ArticleStateType = typeof defaultArticleState;
